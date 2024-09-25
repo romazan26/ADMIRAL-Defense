@@ -11,7 +11,7 @@ import SwiftUI
 struct ADMIRAL_DefenseApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoadingView()
         }
     }
 }
