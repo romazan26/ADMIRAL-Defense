@@ -18,9 +18,16 @@ struct LevelsProgressView: View {
                             .scaledToFit()
                         VStack(spacing: scaleScreen_y(100)) {
                             ForEach(vm.levels.reversed()) { level in
-                                LevelCellView(level: level)
+                                Button {
+                                    vm.simpleLevel = level
+                                } label: {
+                                    LevelCellView(level: level, choose: vm.simpleLevel == level ? true : false)
+                                }
+                                .disabled(level.isOpen ? false : true)
+
+                                
                             }
-                        }.padding(.bottom, 70)
+                        }.padding(.bottom, scaleScreen_x(100))
                     }
                         
                 }.ignoresSafeArea()

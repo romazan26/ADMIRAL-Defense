@@ -12,6 +12,9 @@ final class MainViewModel: ObservableObject {
     let manager = CoreDataManager.instance
     
     @Published var levels: [GameLevel] = []
+    @Published var simpleLevel: GameLevel!
+    
+    @Published var isPresentSettings: Bool = false
     
     init() {
         getData()

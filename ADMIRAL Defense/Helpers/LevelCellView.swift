@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct LevelCellView: View {
-    
+    var choose: Bool
     @ObservedObject var level: GameLevel
+    
     let offset: CGFloat
     
-    init(level: GameLevel) {
+    init(level: GameLevel, choose: Bool) {
+        self.choose = choose
         self.level = level
         let offsets: [CGFloat] = [0, 75, 0, 40, -50, 50, 25, 0]
         offset =  offsets[Int(level.number - 1) % 8]
@@ -21,8 +23,10 @@ struct LevelCellView: View {
     var body: some View {
         ZStack(alignment: .bottom){
         ZStack {
-            Image(.levelBackGround)
+            Image(.noChoose)
                 .resizable()
+                .frame(width: scaleScreen_x(80), height: scaleScreen_x(100))
+                .shadow(color: .yellow, radius: choose ? 20 : 0)
             Text("\(level.number)")
                 .foregroundStyle(.red)
                 .font(.system(size: scaleScreen_x(32), weight: .heavy, design: .monospaced))
@@ -48,6 +52,7 @@ struct LevelCellView: View {
                 
             }
         }
+        
         .frame(width: scaleScreen_x(80), height: scaleScreen_x(100))
         .offset(x: scaleScreen_x(offset))
     }
