@@ -57,7 +57,7 @@ struct battleFieldView: View {
             }
             .frame(width: scaleScreen_x(358), height: scaleScreen_x(420))
             .onAppear {
-                vm.startTimers()
+                vm.startTimers(with: 30)
             }
         
         

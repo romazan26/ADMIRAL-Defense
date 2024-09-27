@@ -10,6 +10,7 @@ import SwiftUI
 struct GameView: View {
     @StateObject var vm: MainViewModel
     @StateObject var vmBattleField = BattleFieldViewmodel()
+    @State var durationBatle: Double = 30
     var body: some View {
         ZStack {
             //MARK: - background
@@ -20,7 +21,7 @@ struct GameView: View {
                 .padding(.bottom, scaleScreen_x(120))
             VStack{
                 //MARK: - Top tool bar
-                TopToolBarGame(actionPause: {})
+                TopToolBarGame(actionPause: {vmBattleField.togglePause()}, timer: Int(vmBattleField.remainingTime), money: vmBattleField.moneyBattleField)
                 Spacer()
                 HStack(alignment: .bottom){
                     //MARK: - Ship info label
@@ -35,6 +36,10 @@ struct GameView: View {
                 //MARK: - Health stroke
                 HealthView(healthPercent: vmBattleField.healthBattleField)
             }.padding(.horizontal)
+            if vmBattleField.gameOver {
+                GameOverView(vm: vmBattleField)
+            }
+           
         }
     }
 }

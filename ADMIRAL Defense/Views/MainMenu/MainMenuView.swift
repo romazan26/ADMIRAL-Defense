@@ -12,33 +12,41 @@ struct MainMenuView: View {
     @StateObject var vm = MainViewModel()
     
     var body: some View {
-        ZStack {
-            LevelsProgressView(vm: vm)
-            VStack{
-                Spacer()
-                
-                //MARK: - Bottom bar
-                HStack{
-                    //MARK: Settings button
-                    Button {
-                        vm.isPresentSettings.toggle()
-                    } label: {
-                        Image(.settings)
+        NavigationView {
+            ZStack {
+                LevelsProgressView(vm: vm)
+                VStack{
+                    Spacer()
+                    
+                    //MARK: - Bottom bar
+                    HStack{
+                        //MARK: Settings button
+                        Button {
+                            vm.isPresentSettings.toggle()
+                        } label: {
+                            Image(.settings)
+                                .resizable()
+                                .frame(width: scaleScreen_x(60), height: scaleScreen_x(60))
+                        }
+                        
+                        //MARK: - Start button
+                        NavigationLink {
+                            GameView(vm: vm)
+                        } label: {
+                            Image(.startbutton)
+                                .resizable()
+                                .frame(width: scaleScreen_x(184), height: scaleScreen_x(60))
+                        }
+
+                        
+                        Image(.ship)
                             .resizable()
                             .frame(width: scaleScreen_x(60), height: scaleScreen_x(60))
                     }
-
-                    
-                    Image(.startbutton)
-                        .resizable()
-                        .frame(width: scaleScreen_x(184), height: scaleScreen_x(60))
-                    Image(.ship)
-                        .resizable()
-                        .frame(width: scaleScreen_x(60), height: scaleScreen_x(60))
                 }
-            }
-            if vm.isPresentSettings{
-                SettingsView(isPresentSettings: $vm.isPresentSettings)
+                if vm.isPresentSettings{
+                    SettingsView(isPresentSettings: $vm.isPresentSettings)
+                }
             }
         }
     }

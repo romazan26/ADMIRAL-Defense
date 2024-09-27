@@ -16,34 +16,45 @@ struct GridElement: Identifiable {
 }
 
 final class BattleFieldViewmodel: ObservableObject {
+    //MARK: - Proerties
+    
     @Published var healthBattleField = 100
     @Published var moneyBattleField = 0
     
-    //MARK: - Proerties
+    @Published var gameOver: Bool = false
+    @Published var gameVictory: Bool = false
+    // Ограничение на время работы таймера
+    @Published var maxTimerDuration: TimeInterval = 15.0
+    // Массив для хранения всех элементов
+    @Published var elements: [GridElement] = []
+    // Оставшееся время работы таймера
+    @Published var remainingTime: TimeInterval = 0
+    // Состояние паузы игры
+    @Published var isPaused: Bool = false
+    
+    
+    // Время, прошедшее до паузы
+    private var elapsedBeforePause: TimeInterval = 0
     // Таймер для добавления новых элементов
     private var addElementTimer: AnyCancellable?
-    
     // Таймер для проверки времени существования элементов
     private var printPositionTimer: AnyCancellable?
-    
     // Время старта таймера
     private var timerStartTime: Date?
     
-    // Ограничение на время работы таймера
-    private let maxTimerDuration: TimeInterval = 15.0
-    
+    // настройки размера таблицы
     let rows = 6
     let columns = 4
     let totalCells = (6 * 4)
-    
-    // Массив для хранения всех элементов
-    @Published var elements: [GridElement] = []
     
     //MARK: - Add demage health
     func demadge(){
         healthBattleField -= 1
         if healthBattleField <= 0 {
             stopTimers()
+            healthBattleField = 0
+            gameOver = true
+            print("gameover: \(gameOver)")
         }
     }
     
@@ -105,33 +116,58 @@ final class BattleFieldViewmodel: ObservableObject {
     }
     
     //MARK: -  Таймеры для работы приложения
-    func startTimers() {
+    func startTimers(with duration: Double) {
+        maxTimerDuration = duration
         startElementAdditionTimer()
         startPositionPrintingTimer()
     }
     
+    // Функция для паузы/возобновления игры
+    func togglePause() {
+        isPaused.toggle()
+        
+        if isPaused {
+            // Приостановка: сохраняем время, прошедшее до паузы
+            if let startTime = timerStartTime {
+                elapsedBeforePause += Date().timeIntervalSince(startTime)
+            }
+            stopTimers() // Останавливаем все таймеры
+        } else {
+            // Возобновляем: пересчитываем оставшееся время и перезапускаем таймеры
+            timerStartTime = Date()
+            startElementAdditionTimer()
+            startPositionPrintingTimer()
+        }
+    }
+    
     // Таймер для добавления новых элементов
     private func startElementAdditionTimer() {
-           timerStartTime = Date()  // Запоминаем время старта
-           addElementTimer = Timer.publish(every: 2.0, on: .main, in: .common)
-               .autoconnect()
-               .sink { [weak self] _ in
-                   guard let self = self else { return }
-                   
-                   // Проверяем, сколько времени прошло с начала таймера
-                   if let startTime = self.timerStartTime {
-                       let elapsedTime = Date().timeIntervalSince(startTime)
-                       if elapsedTime >= self.maxTimerDuration {
-                           // Останавливаем таймер, если прошло 15 секунд
-                           print("Таймер добавления остановлен через \(self.maxTimerDuration) секунд.")
-                           self.stopElementAdditionTimer()
-                       } else {
-                           // Добавляем новый элемент, если таймер ещё работает
-                           self.addRandomElement()
-                       }
-                   }
-               }
-       }
+        timerStartTime = Date()  // Запоминаем время старта
+        addElementTimer = Timer.publish(every: 1.0, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                // Текущее время
+                let currentTime = Date()
+                
+                // Общее время работы таймера
+                if let startTime = self.timerStartTime {
+                    let elapsedTime = currentTime.timeIntervalSince(startTime) + self.elapsedBeforePause
+                    
+                    // Обновляем оставшееся время
+                    self.remainingTime = self.maxTimerDuration - elapsedTime
+                    
+                    // Проверяем, если время истекло
+                    if self.remainingTime <= 0 {
+                        print("Таймер добавления остановлен через \(self.maxTimerDuration) секунд.")
+                        self.stopElementAdditionTimer()
+                    } else {
+                        // Добавляем новый элемент, если таймер ещё работает
+                        self.addRandomElement()
+                    }
+                }
+            }
+    }
     
     // Таймер позиции элемента, если он существует более 1 секунд
     private func startPositionPrintingTimer() {
@@ -154,10 +190,11 @@ final class BattleFieldViewmodel: ObservableObject {
         }
     }
     // Остановка таймера добавления новых элементов
-       private func stopElementAdditionTimer() {
-           addElementTimer?.cancel()
-           addElementTimer = nil
-       }
+    private func stopElementAdditionTimer() {
+        addElementTimer?.cancel()
+        addElementTimer = nil
+        remainingTime = 0 // Сбрасываем оставшееся время при остановке
+    }
     
     // Функция для остановки всех таймеров
     func stopTimers() {
