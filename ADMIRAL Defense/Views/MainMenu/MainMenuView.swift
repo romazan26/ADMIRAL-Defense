@@ -37,6 +37,7 @@ struct MainMenuView: View {
                                 .resizable()
                                 .frame(width: scaleScreen_x(184), height: scaleScreen_x(60))
                         }
+                        .disabled(vm.simpleLevel == nil ? true : false)
 
                         
                         Image(.ship)

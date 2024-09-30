@@ -25,9 +25,9 @@ struct TopToolBarGame: View {
             Spacer()
             //MARK: Wave and timer
             VStack{
-                Text("\(numberWave) WAVE")
+                Text("\(numberWave) level")
                     .font(.system(size: 32, weight: .heavy, design: .monospaced))
-                Text("00:\(timer)")
+                Text("timer:\(timer)")
                     .font(.system(size: 24, weight: .heavy, design: .monospaced))
             }
             .foregroundStyle(.settings)

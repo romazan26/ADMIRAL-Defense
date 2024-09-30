@@ -18,11 +18,14 @@ struct GridElement: Identifiable {
 final class BattleFieldViewmodel: ObservableObject {
     //MARK: - Proerties
     
+    @Published var simpleCrore: Int = 0
     @Published var healthBattleField = 100
     @Published var moneyBattleField = 0
     
     @Published var gameOver: Bool = false
     @Published var gameVictory: Bool = false
+    @Published var isPauseview: Bool = false
+    
     // Ограничение на время работы таймера
     @Published var maxTimerDuration: TimeInterval = 15.0
     // Массив для хранения всех элементов
@@ -47,14 +50,70 @@ final class BattleFieldViewmodel: ObservableObject {
     let columns = 4
     let totalCells = (6 * 4)
     
+    //MARK: - Victory game
+    func victoryGame(){
+        stopTimers()
+        gameVictory = true
+        if (0...20) .contains(healthBattleField){
+            simpleCrore = 1
+        }
+        if (20...70) .contains(healthBattleField){
+            simpleCrore = 2
+        }
+        if healthBattleField > 70 {
+            simpleCrore = 3
+        }
+        print("gameVictory: \(gameVictory)")
+        print("simpleCrore: \(simpleCrore)")
+    }
+    
+    //MARK: - Restart game function
+    func restartGame(timertime: Double){
+        stopTimers()
+        healthBattleField = 100
+        moneyBattleField = 0
+        gameOver = false
+        gameVictory = false
+        elements.removeAll()
+        startTimers(with: timertime)
+    }
     //MARK: - Add demage health
-    func demadge(){
-        healthBattleField -= 1
-        if healthBattleField <= 0 {
-            stopTimers()
-            healthBattleField = 0
-            gameOver = true
-            print("gameover: \(gameOver)")
+    func demadge(hero: GridElement){
+        var getDemedge = false
+        switch hero.hero{
+        case .monster1:
+            getDemedge = true
+        case .monster2:
+            getDemedge = true
+        case .monster3:
+            getDemedge = true
+        case .monster4:
+            getDemedge = true
+        case .pirat1:
+            getDemedge = true
+        case .pirat2:
+            getDemedge = true
+        case .pirat3:
+            getDemedge = true
+        case .admiral:
+            getDemedge = false
+        case .jewerly1:
+            getDemedge = false
+        case .jewerly2:
+            getDemedge = false
+        case .jewerly3:
+            getDemedge = false
+        case .bomb:
+            getDemedge = false
+        }
+        if getDemedge{
+            healthBattleField -= 1
+            if healthBattleField <= 0 {
+                stopTimers()
+                healthBattleField = 0
+                gameOver = true
+                print("gameover: \(gameOver)")
+            }
         }
     }
     
@@ -125,6 +184,7 @@ final class BattleFieldViewmodel: ObservableObject {
     // Функция для паузы/возобновления игры
     func togglePause() {
         isPaused.toggle()
+        isPauseview.toggle()
         
         if isPaused {
             // Приостановка: сохраняем время, прошедшее до паузы
@@ -161,6 +221,7 @@ final class BattleFieldViewmodel: ObservableObject {
                     if self.remainingTime <= 0 {
                         print("Таймер добавления остановлен через \(self.maxTimerDuration) секунд.")
                         self.stopElementAdditionTimer()
+                        self.victoryGame()
                     } else {
                         // Добавляем новый элемент, если таймер ещё работает
                         self.addRandomElement()
@@ -184,7 +245,7 @@ final class BattleFieldViewmodel: ObservableObject {
         for element in elements {
             let age = currentTime.timeIntervalSince(element.creationTime)
             if age > 1 {
-                demadge()
+                demadge(hero: element)
                 print("health \(healthBattleField) ")
             }
         }

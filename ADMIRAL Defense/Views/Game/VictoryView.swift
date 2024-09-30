@@ -2,15 +2,15 @@
 //  GameOverView.swift
 //  ADMIRAL Defense
 //
-//  Created by Роман on 27.09.2024.
+//  Created by Роман on 30.09.2024.
 //
 
 import SwiftUI
 
-struct GameOverView: View {
+struct VictoryView: View {
     @StateObject var vm: BattleFieldViewmodel
+    @StateObject var vmMain: MainViewModel
     @Environment(\.dismiss) var dismiss
-    let timerLeveltime: Double
     var body: some View {
         ZStack {
             Color.black
@@ -27,14 +27,14 @@ struct GameOverView: View {
                         .font(.system(size: scaleScreen_x(34), weight: .heavy, design: .monospaced))
                     //MARK: - Stars
                     HStack(spacing: -19){
-                        Image(.nullStar)
+                        Image(.fullStar)
                             .resizable()
                             .frame(width: scaleScreen_x(73), height: scaleScreen_x(73))
                             .offset(y: -20)
-                        Image(.nullStar)
+                        Image(vm.simpleCrore > 1 ? .fullStar : .nullStar)
                             .resizable()
                             .frame(width: scaleScreen_x(73), height: scaleScreen_x(73))
-                        Image(.nullStar)
+                        Image(vm.simpleCrore > 2 ? .fullStar : .nullStar)
                             .resizable()
                             .frame(width: scaleScreen_x(73), height: scaleScreen_x(73))
                             .offset(y: -20)
@@ -51,11 +51,13 @@ struct GameOverView: View {
                             .font(.system(size: 24, weight: .heavy, design: .monospaced))
                     }.padding(.horizontal, scaleScreen_x(90))
                     
-                    //MARK: - Restart button
+                    //MARK: - Next button
                     Button {
-                        vm.restartGame(timertime: timerLeveltime)
+                        vmMain.nextLevel()
+                        vm.restartGame(timertime: vmMain.simpleLevel.time)
+                       // vm.gameVictory.toggle()
                     } label: {
-                        SettingsButtonView(text: "RESTART")
+                        SettingsButtonView(text: "NEXT")
                     }
                     
                     //MARK: - MENU button
@@ -69,11 +71,15 @@ struct GameOverView: View {
 
 
                 }
-            }.frame(width: scaleScreen_x(332), height: scaleScreen_x(491))
+            }
+            .onAppear() {
+                vmMain.completedLevel(score: Int16(vm.simpleCrore))
+            }
+            .frame(width: scaleScreen_x(332), height: scaleScreen_x(491))
         }
     }
 }
 
 #Preview {
-    GameOverView(vm: BattleFieldViewmodel(), timerLeveltime: 30)
+    VictoryView(vm: BattleFieldViewmodel(), vmMain: MainViewModel())
 }

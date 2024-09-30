@@ -20,6 +20,8 @@ struct LevelsProgressView: View {
                             ForEach(vm.levels.reversed()) { level in
                                 Button {
                                     vm.simpleLevel = level
+                                    print("tap")
+                                    print("level: \(vm.simpleLevel)")
                                 } label: {
                                     LevelCellView(level: level, choose: vm.simpleLevel == level ? true : false)
                                 }

@@ -2,12 +2,12 @@
 //  GameOverView.swift
 //  ADMIRAL Defense
 //
-//  Created by Роман on 27.09.2024.
+//  Created by Роман on 30.09.2024.
 //
 
 import SwiftUI
 
-struct GameOverView: View {
+struct PauseView: View {
     @StateObject var vm: BattleFieldViewmodel
     @Environment(\.dismiss) var dismiss
     let timerLeveltime: Double
@@ -22,23 +22,9 @@ struct GameOverView: View {
                     .resizable()
                 VStack {
                     //MARK: - Label view
-                    Text("DEFEAT")
+                    Text("PAUSE")
                         .foregroundStyle(.settings)
                         .font(.system(size: scaleScreen_x(34), weight: .heavy, design: .monospaced))
-                    //MARK: - Stars
-                    HStack(spacing: -19){
-                        Image(.nullStar)
-                            .resizable()
-                            .frame(width: scaleScreen_x(73), height: scaleScreen_x(73))
-                            .offset(y: -20)
-                        Image(.nullStar)
-                            .resizable()
-                            .frame(width: scaleScreen_x(73), height: scaleScreen_x(73))
-                        Image(.nullStar)
-                            .resizable()
-                            .frame(width: scaleScreen_x(73), height: scaleScreen_x(73))
-                            .offset(y: -20)
-                    }.padding(.bottom, 10)
                     
                     //MARK: - Coins score
                     HStack {
@@ -57,12 +43,18 @@ struct GameOverView: View {
                     } label: {
                         SettingsButtonView(text: "RESTART")
                     }
-                    
-                    //MARK: - MENU button
+                    //MARK: - Restart button
                     Button {
                         dismiss()
                     } label: {
-                        Text("Menu")
+                        SettingsButtonView(text: "MENU")
+                    }
+                    
+                    //MARK: - MENU button
+                    Button {
+                        vm.togglePause()
+                    } label: {
+                        Text("Back")
                             .foregroundStyle(.settings)
                             .font(.system(size: 32, weight: .heavy, design: .monospaced))
                     }
@@ -75,5 +67,5 @@ struct GameOverView: View {
 }
 
 #Preview {
-    GameOverView(vm: BattleFieldViewmodel(), timerLeveltime: 30)
+    PauseView(vm: BattleFieldViewmodel(), timerLeveltime: 30)
 }
