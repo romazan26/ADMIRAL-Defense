@@ -10,6 +10,7 @@ import SwiftUI
 struct MainMenuView: View {
     
     @StateObject var vm = MainViewModel()
+    @StateObject var vmShips = ShipsViewModel()
     
     var body: some View {
         NavigationView {
@@ -39,10 +40,14 @@ struct MainMenuView: View {
                         }
                         .disabled(vm.simpleLevel == nil ? true : false)
 
-                        
-                        Image(.ship)
-                            .resizable()
-                            .frame(width: scaleScreen_x(60), height: scaleScreen_x(60))
+                        //MARK: - Ships button
+                        NavigationLink {
+                            ShipsView(vm: vmShips)
+                        } label: {
+                            Image(.ship)
+                                .resizable()
+                                .frame(width: scaleScreen_x(60), height: scaleScreen_x(60))
+                        }  
                     }
                 }
                 if vm.isPresentSettings{
