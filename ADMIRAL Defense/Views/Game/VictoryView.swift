@@ -53,9 +53,10 @@ struct VictoryView: View {
                     
                     //MARK: - Next button
                     Button {
+                        SoundManager.instance.playSound(sound: .buttonClick)
                         vmMain.nextLevel()
                         vm.restartGame(timertime: vmMain.simpleLevel.time)
-                       // vm.gameVictory.toggle()
+                       
                     } label: {
                         SettingsButtonView(text: "NEXT")
                     }
@@ -63,6 +64,7 @@ struct VictoryView: View {
                     //MARK: - MENU button
                     Button {
                         dismiss()
+                        SoundManager.instance.playSound(sound: .buttonClick)
                     } label: {
                         Text("Menu")
                             .foregroundStyle(.settings)

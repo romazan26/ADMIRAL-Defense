@@ -23,6 +23,7 @@ struct IntroView: View {
             Button {
                 isFirstStart = false
                 isPresented = true
+                SoundManager.instance.playSound(sound: .buttonClick)
             } label: {
                 Text("SKIP")
                     .foregroundStyle(.white)

@@ -18,9 +18,12 @@ struct GridElement: Identifiable {
 final class BattleFieldViewmodel: ObservableObject {
     //MARK: - Proerties
     
+    @AppStorage("money") var money: Int?
+    
     @Published var simpleCrore: Int = 0
     @Published var healthBattleField = 100
     @Published var moneyBattleField = 0
+    @Published var simpleMoney: Int = 0
     
     @Published var gameOver: Bool = false
     @Published var gameVictory: Bool = false
@@ -50,10 +53,17 @@ final class BattleFieldViewmodel: ObservableObject {
     let columns = 4
     let totalCells = (6 * 4)
     
+    init(){
+        simpleMoney = money ?? 0
+    }
+    
     //MARK: - Victory game
     func victoryGame(){
         stopTimers()
         gameVictory = true
+        
+        simpleMoney += moneyBattleField
+        money = simpleMoney
         if (0...20) .contains(healthBattleField){
             simpleCrore = 1
         }
@@ -63,8 +73,6 @@ final class BattleFieldViewmodel: ObservableObject {
         if healthBattleField > 70 {
             simpleCrore = 3
         }
-        print("gameVictory: \(gameVictory)")
-        print("simpleCrore: \(simpleCrore)")
     }
     
     //MARK: - Restart game function
@@ -74,27 +82,36 @@ final class BattleFieldViewmodel: ObservableObject {
         moneyBattleField = 0
         gameOver = false
         gameVictory = false
+        isPauseview = false
         elements.removeAll()
         startTimers(with: timertime)
     }
     //MARK: - Add demage health
     func demadge(hero: GridElement){
+        
         var getDemedge = false
         switch hero.hero{
         case .monster1:
             getDemedge = true
+            SoundManager.instance.playSound(sound: .damage)
         case .monster2:
             getDemedge = true
+            SoundManager.instance.playSound(sound: .damage)
         case .monster3:
             getDemedge = true
+            SoundManager.instance.playSound(sound: .damage)
         case .monster4:
             getDemedge = true
+            SoundManager.instance.playSound(sound: .damage)
         case .pirat1:
             getDemedge = true
+            SoundManager.instance.playSound(sound: .damage)
         case .pirat2:
             getDemedge = true
+            SoundManager.instance.playSound(sound: .damage)
         case .pirat3:
             getDemedge = true
+            SoundManager.instance.playSound(sound: .damage)
         case .admiral:
             getDemedge = false
         case .jewerly1:
@@ -105,6 +122,7 @@ final class BattleFieldViewmodel: ObservableObject {
             getDemedge = false
         case .bomb:
             getDemedge = false
+            SoundManager.instance.playSound(sound: .bomb)
         }
         if getDemedge{
             healthBattleField -= 1

@@ -56,7 +56,7 @@ struct battleFieldView: View {
                 
             }
             .navigationBarBackButtonHidden()    
-            .frame(width: scaleScreen_x(358), height: scaleScreen_x(420))
+            .frame(width: scaleScreen_x(358), height: scaleScreen_y(380))
             .onAppear {
                 vm.startTimers(with: 30)
             }

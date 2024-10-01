@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TopToolbarShips: View {
     @Environment(\.dismiss) var dismiss
-    var money = 567
+    var money: Int
     var body: some View {
         HStack{
             //MARK: - Back button
@@ -53,5 +53,5 @@ struct TopToolbarShips: View {
 }
 
 #Preview {
-    TopToolbarShips()
+    TopToolbarShips( money: 50)
 }

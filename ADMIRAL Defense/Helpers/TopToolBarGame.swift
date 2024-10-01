@@ -17,6 +17,7 @@ struct TopToolBarGame: View {
             //MARK: - Pause button
             Button {
                 actionPause()
+                SoundManager.instance.playSound(sound: .buttonClick)
             } label: {
                 Image(.pause)
                     .resizable()

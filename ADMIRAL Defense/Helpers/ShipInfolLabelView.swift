@@ -25,12 +25,12 @@ struct ShipInfolLabelView: View {
                     Text("+\(vm.getFullExtraPoints())%")
                 }
             }
-            .padding()
-            .font(.system(size: scaleScreen_x(16), weight: .heavy, design: .monospaced))
+            .padding(10)
+            .font(.system(size: scaleScreen_x(14), weight: .heavy, design: .monospaced))
             
         }
         .foregroundStyle(.white)
-        .frame(width: scaleScreen_x(237), height: scaleScreen_x(73))
+        .frame(width: scaleScreen_x(237), height: scaleScreen_x(50))
     }
     
     

@@ -5,11 +5,14 @@
 //  Created by Роман on 25.09.2024.
 //
 
-import Foundation
+import SwiftUI
 import CoreData
 
 final class MainViewModel: ObservableObject {
     let manager = CoreDataManager.instance
+    
+    @AppStorage("volumeSound") var volumeSound: String?
+    @AppStorage("volumeMusic") var volumeMusic: String?
     
     @Published var levels: [GameLevel] = []
     @Published var simpleLevel: GameLevel!
@@ -23,6 +26,28 @@ final class MainViewModel: ObservableObject {
                 addLevel()
             }
         }
+    }
+    
+    //MARK: - Sound
+    func soundMute() {
+        if SoundManager.instance.player?.volume != 0 {
+            volumeSound = "0"
+            SoundManager.instance.player?.volume = 0
+        }else{
+            volumeSound = "1"
+            SoundManager.instance.player?.volume = 1
+        }
+        
+    }
+    func musicMute() {
+        if MusicManager.instance.player?.volume != 0 {
+            volumeMusic = "0"
+            MusicManager.instance.player?.volume = 0
+        }else{
+            volumeMusic = "1"
+            MusicManager.instance.player?.volume = 1
+        }
+        
     }
     
     //MARK: Next level

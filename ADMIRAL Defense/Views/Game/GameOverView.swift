@@ -53,6 +53,7 @@ struct GameOverView: View {
                     
                     //MARK: - Restart button
                     Button {
+                        SoundManager.instance.playSound(sound: .buttonClick)
                         vm.restartGame(timertime: timerLeveltime)
                     } label: {
                         SettingsButtonView(text: "RESTART")
@@ -61,6 +62,7 @@ struct GameOverView: View {
                     //MARK: - MENU button
                     Button {
                         dismiss()
+                        SoundManager.instance.playSound(sound: .buttonClick)
                     } label: {
                         Text("Menu")
                             .foregroundStyle(.settings)

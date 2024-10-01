@@ -33,6 +33,7 @@ struct SettingsView: View {
                     //MARK: - Policy button
                     Button {
                         isPresentPolicy.toggle()
+                        SoundManager.instance.playSound(sound: .buttonClick)
                     } label: {
                         SettingsButtonView(text: "POLICY")
                     }
@@ -40,6 +41,7 @@ struct SettingsView: View {
                     //MARK: - Share button
                     Button {
                         isPresentShare.toggle()
+                        SoundManager.instance.playSound(sound: .buttonClick)
                     } label: {
                         SettingsButtonView(text: "SHARE")
                     }
@@ -47,6 +49,7 @@ struct SettingsView: View {
                     //MARK: - Rate us button
                     Button {
                         SKStoreReviewController.requestReview()
+                        SoundManager.instance.playSound(sound: .buttonClick)
                     } label: {
                         SettingsButtonView(text: "RATE US")
                     }
@@ -54,6 +57,7 @@ struct SettingsView: View {
                     //MARK: - Back button
                     Button {
                         isPresentSettings.toggle()
+                        SoundManager.instance.playSound(sound: .buttonClick)
                     } label: {
                         Text("BACK")
                             .foregroundStyle(.settings)

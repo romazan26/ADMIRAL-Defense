@@ -24,6 +24,62 @@ final class ShipsViewModel: ObservableObject {
         simpleMoney = money ?? 0
     }
     
+    //MARK: - get data of money
+    func loadMoney(){
+        simpleMoney = money ?? 0
+    }
+    //MARK: - Buy upgrade
+    func buyHealthUpgrade(){
+        if simpleMoney  >= 10000{
+            simpleMoney -= 10000
+            let request = NSFetchRequest<Ship>(entityName: "Ship")
+            do{
+                ships = try manager.context.fetch(request)
+                let ship = ships.first(where: {$0.number == simpleShip.number})
+                ship?.addHeath += 10
+            }catch let error{
+                print("error fetching ships: \(error)")
+            }
+            SoundManager.instance.playSound(sound: .buy)
+            saveShip()
+            money = simpleMoney
+        }
+    }
+    
+    func buyShieldUpgrade(){
+        if simpleMoney  >= 10000{
+            simpleMoney -= 10000
+            let request = NSFetchRequest<Ship>(entityName: "Ship")
+            do{
+                ships = try manager.context.fetch(request)
+                let ship = ships.first(where: {$0.number == simpleShip.number})
+                ship?.addSheld += 10
+            }catch let error{
+                print("error fetching ships: \(error)")
+            }
+            SoundManager.instance.playSound(sound: .buy)
+            saveShip()
+            money = simpleMoney
+        }
+    }
+    
+    func buyPointsUpgrade(){
+        if simpleMoney  >= 10000{
+            simpleMoney -= 10000
+            let request = NSFetchRequest<Ship>(entityName: "Ship")
+            do{
+                ships = try manager.context.fetch(request)
+                let ship = ships.first(where: {$0.number == simpleShip.number})
+                ship?.addPoints += 10
+            }catch let error{
+                print("error fetching ships: \(error)")
+            }
+            SoundManager.instance.playSound(sound: .buy)
+            saveShip()
+            money = simpleMoney
+        }
+    }
+    
     //MARK: - Buy ship
     func buyShip(){
         if simpleMoney  >= simpleShip.price{
@@ -36,6 +92,7 @@ final class ShipsViewModel: ObservableObject {
             }catch let error{
                 print("Error fetching ships: \(error)")
             }
+            SoundManager.instance.playSound(sound: .buy)
             saveShip()
             money = simpleMoney
         }

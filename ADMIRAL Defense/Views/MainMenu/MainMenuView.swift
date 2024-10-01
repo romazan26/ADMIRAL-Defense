@@ -17,6 +17,29 @@ struct MainMenuView: View {
             ZStack {
                 LevelsProgressView(vm: vm)
                 VStack{
+                    //MARK: - Sounds button
+                    HStack{
+                        Spacer()
+                        VStack{
+                            Button {
+                                SoundManager.instance.playSound(sound: .buttonClick)
+                                vm.soundMute()
+                            } label: {
+                                Image(vm.volumeSound == "0" ? .soundOff : .soundMute)
+                                    .resizable()
+                                    .frame(width: scaleScreen_x(60), height: scaleScreen_x(60))
+                            }
+                            Button {
+                                SoundManager.instance.playSound(sound: .buttonClick)
+                                vm.musicMute()
+                            } label: {
+                                Image(vm.volumeMusic == "0" ? .musicOff : .musicMute)
+                                    .resizable()
+                                    .frame(width: scaleScreen_x(60), height: scaleScreen_x(60))
+                            }
+
+                        }.padding(.horizontal)
+                    }
                     Spacer()
                     
                     //MARK: - Bottom bar
@@ -24,6 +47,7 @@ struct MainMenuView: View {
                         //MARK: Settings button
                         Button {
                             vm.isPresentSettings.toggle()
+                            SoundManager.instance.playSound(sound: .buttonClick)
                         } label: {
                             Image(.settings)
                                 .resizable()
@@ -32,7 +56,10 @@ struct MainMenuView: View {
                         
                         //MARK: - Start button
                         NavigationLink {
-                            GameView(vm: vm)
+                            GameView(vm: vm, vmShips: vmShips)
+                                .onAppear {
+                                    SoundManager.instance.playSound(sound: .buttonClick)
+                                }
                         } label: {
                             Image(.startbutton)
                                 .resizable()
@@ -43,6 +70,9 @@ struct MainMenuView: View {
                         //MARK: - Ships button
                         NavigationLink {
                             ShipsView(vm: vmShips)
+                                .onAppear {
+                                    SoundManager.instance.playSound(sound: .buttonClick)
+                                }
                         } label: {
                             Image(.ship)
                                 .resizable()
@@ -54,6 +84,9 @@ struct MainMenuView: View {
                     SettingsView(isPresentSettings: $vm.isPresentSettings)
                 }
             }
+        }
+        .onAppear {
+            MusicManager.instance.playSound(sound: .menuMusic)
         }
     }
 }

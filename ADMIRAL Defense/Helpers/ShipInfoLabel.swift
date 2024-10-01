@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ShipInfoLabel: View {
+    var health: Int
+    var shield: Int
+    var extraPoints: Int
     var body: some View {
         ZStack {
             Image(.shipInfoBackground)
@@ -20,9 +23,9 @@ struct ShipInfoLabel: View {
                 }
                 Spacer()
                 VStack(alignment: .trailing) {
-                    Text("+10%")
-                    Text("OFF")
-                    Text("+10%")
+                    Text("+\(health)%")
+                    Text("+\(shield)%")
+                    Text("+\(extraPoints)%")
                 }
             }
             .padding()
@@ -33,5 +36,5 @@ struct ShipInfoLabel: View {
 }
 
 #Preview {
-    ShipInfoLabel()
+    ShipInfoLabel(health: 10, shield: 0, extraPoints: 0)
 }

@@ -21,18 +21,27 @@ struct ShipsView: View {
                 HStack{
                     Spacer()
                     ShipInfolLabelView(vm: vm)
+                    //MARK: CHEATS
+                        .onTapGesture {
+                            vm.simpleMoney = 1000000
+                        }
                 }.padding(.top)
+                Spacer()
                 //MARK: - Ship image
                 if vm.getIsOpen() {
-                    Image(vm.simpleShip.image)
-                        .resizable()
-                        .frame(width: scaleScreen_x(220), height: scaleScreen_x(320))
+                    VStack {
+                        Image(vm.simpleShip.image)
+                            .resizable()
+                            .frame(width: scaleScreen_x(180), height: scaleScreen_x(230))
+                        UpgradeShipView(vm: vm)
+                    }
+                    
                 }else{
                     VStack {
                         ZStack {
                             Image(vm.simpleShip.imageClose)
                                 .resizable()
-                                .frame(width: scaleScreen_x(180), height: scaleScreen_x(260))
+                                .frame(width: scaleScreen_x(180), height: scaleScreen_x(230))
                             Text("\(vm.simpleShip.price)")
                                 .foregroundStyle(.red)
                                 .font(.system(size: 72,weight: .heavy,design: .monospaced))
@@ -44,7 +53,7 @@ struct ShipsView: View {
                         Button {
                             vm.buyShip()
                         } label: {
-                            SettingsButtonView(text: "BUY")
+                            BuyButtonView(text: "BUY")
                         }
 
                     }
@@ -60,7 +69,7 @@ struct ShipsView: View {
                         } label: {
                             Image(.backButton)
                                 .resizable()
-                                .frame(width: scaleScreen_x(60), height: scaleScreen_x(60))
+                                .frame(width: scaleScreen_x(50), height: scaleScreen_x(50))
                         }
                     }
                     if vm.simpleShip.number < 5{
@@ -69,13 +78,17 @@ struct ShipsView: View {
                         } label: {
                             Image(.nextButton)
                                 .resizable()
-                                .frame(width: scaleScreen_x(60), height: scaleScreen_x(60))
+                                .frame(width: scaleScreen_x(50), height: scaleScreen_x(50))
                         }
                     }
 
                 }
             }.padding()
                 .navigationBarBackButtonHidden()
+        }
+        .onAppear(){
+            vm.loadMoney()
+            print("load money")
         }
     }
 }

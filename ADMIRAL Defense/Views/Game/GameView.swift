@@ -11,6 +11,7 @@ struct GameView: View {
     
     @StateObject var vm: MainViewModel
     @StateObject var vmBattleField = BattleFieldViewmodel()
+    @StateObject var vmShips: ShipsViewModel
 
     var body: some View {
         ZStack {
@@ -22,15 +23,17 @@ struct GameView: View {
                 .padding(.bottom, scaleScreen_x(120))
             VStack{
                 //MARK: - Top tool bar
-                TopToolBarGame(actionPause: {vmBattleField.togglePause()}, timer: Int(vmBattleField.remainingTime), numberWave: Int(vm.simpleLevel.number), money: vmBattleField.moneyBattleField)
+                TopToolBarGame(actionPause: {vmBattleField.togglePause()}, timer: Int(vmBattleField.remainingTime), numberWave: Int(vm.simpleLevel.number), money: vmBattleField.simpleMoney)
                 Spacer()
                 HStack(alignment: .bottom){
                     //MARK: - Ship info label
-                    ShipInfoLabel()
+                    ShipInfoLabel(health: vmShips.getFullHealth(),
+                                  shield: vmShips.getFullShield(),
+                                  extraPoints: vmShips.getFullExtraPoints())
                         .padding(.bottom)
                     Spacer()
                     //MARK: - Ship image
-                    Image(.shipImage1)
+                    Image(vmShips.simpleShip.image)
                         .resizable()
                         .frame(width: scaleScreen_x(117), height: scaleScreen_x(170))
                 }
@@ -51,9 +54,16 @@ struct GameView: View {
                 PauseView(vm: vmBattleField, timerLeveltime: vm.simpleLevel.time)
             }
         }
+        .onAppear {
+            print("game appear")
+            MusicManager.instance.playSound(sound: .gameMusic)
+        }
+        .onDisappear {
+            MusicManager.instance.playSound(sound: .menuMusic)
+        }
     }
 }
 
 #Preview {
-    GameView(vm: MainViewModel())
+    GameView(vm: MainViewModel(), vmShips: ShipsViewModel())
 }

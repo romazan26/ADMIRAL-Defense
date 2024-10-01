@@ -40,12 +40,14 @@ struct PauseView: View {
                     //MARK: - Restart button
                     Button {
                         vm.restartGame(timertime: timerLeveltime)
+                        SoundManager.instance.playSound(sound: .buttonClick)
                     } label: {
                         SettingsButtonView(text: "RESTART")
                     }
                     //MARK: - Restart button
                     Button {
                         dismiss()
+                        SoundManager.instance.playSound(sound: .buttonClick)
                     } label: {
                         SettingsButtonView(text: "MENU")
                     }
@@ -53,6 +55,7 @@ struct PauseView: View {
                     //MARK: - MENU button
                     Button {
                         vm.togglePause()
+                        SoundManager.instance.playSound(sound: .buttonClick)
                     } label: {
                         Text("Back")
                             .foregroundStyle(.settings)
