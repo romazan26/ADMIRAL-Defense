@@ -15,3 +15,7 @@ struct ADMIRAL_DefenseApp: App {
         }
     }
 }
+
+//Аккаунт: ketzalycheda@gmail.com
+//Пароль: Prekazi321.
+//Bundle ID: com.ere.admrld3f3nse
