@@ -13,7 +13,7 @@ workflows:
           - certificate_credentials # <-- (CERTIFICATE_PRIVATE_KEY - Put your Certificate Private Key here)
           #- other
         vars:
-          XCODE_PROJECT: "ADMIRAL Defense.xcodeproj" # <-- Put the name of your workspace here.
+          XCODE_PROJECT: "ADMIRAL_Defense.xcodeproj" # <-- Put the name of your workspace here.
           XCODE_SCHEME: "ADMIRAL Defense" # <-- Put the name of your scheme here.
           BUNDLE_ID: "com.ere.admrld3f3nse" # <-- Put your Bundle Id here.
           APP_STORE_APPLE_ID: 6736395538 # <-- Put the app id number here. This is found in App Store Connect > App > General > App Information
