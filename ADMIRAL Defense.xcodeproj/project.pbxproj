@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXFileReference section */
@@ -11,11 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		3058C3792CA40DA8008A27E9 /* ADMIRAL Defense */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "ADMIRAL Defense";
-			sourceTree = "<group>";
-		};
+		3058C3792CA40DA8008A27E9 /* ADMIRAL Defense */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "ADMIRAL Defense"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +82,7 @@
 				};
 			};
 			buildConfigurationList = 3058C3722CA40DA8008A27E9 /* Build configuration list for PBXProject "ADMIRAL Defense" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -93,8 +90,6 @@
 				Base,
 			);
 			mainGroup = 3058C36E2CA40DA8008A27E9;
-			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			productRefGroup = 3058C3782CA40DA8008A27E9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
