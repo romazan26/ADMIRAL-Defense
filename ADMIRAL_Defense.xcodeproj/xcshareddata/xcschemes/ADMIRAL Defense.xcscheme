@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3058C3762CA40DA8008A27E9"
-               BuildableName = "ADMIRAL Defense.app"
-               BlueprintName = "ADMIRAL Defense"
-               ReferencedContainer = "container:ADMIRAL Defense.xcodeproj">
+               BuildableName = "ADMIRAL_Defense.app"
+               BlueprintName = "ADMIRAL_Defense"
+               ReferencedContainer = "container:ADMIRAL_Defense.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3058C3762CA40DA8008A27E9"
-            BuildableName = "ADMIRAL Defense.app"
-            BlueprintName = "ADMIRAL Defense"
-            ReferencedContainer = "container:ADMIRAL Defense.xcodeproj">
+            BuildableName = "ADMIRAL_Defense.app"
+            BlueprintName = "ADMIRAL_Defense"
+            ReferencedContainer = "container:ADMIRAL_Defense.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3058C3762CA40DA8008A27E9"
-            BuildableName = "ADMIRAL Defense.app"
-            BlueprintName = "ADMIRAL Defense"
-            ReferencedContainer = "container:ADMIRAL Defense.xcodeproj">
+            BuildableName = "ADMIRAL_Defense.app"
+            BlueprintName = "ADMIRAL_Defense"
+            ReferencedContainer = "container:ADMIRAL_Defense.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

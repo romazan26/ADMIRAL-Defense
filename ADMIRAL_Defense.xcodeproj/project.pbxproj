@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		3058C3772CA40DA8008A27E9 /* ADMIRAL Defense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ADMIRAL Defense.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3058C3772CA40DA8008A27E9 /* ADMIRAL_Defense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ADMIRAL_Defense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -36,7 +36,7 @@
 		3058C3782CA40DA8008A27E9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3058C3772CA40DA8008A27E9 /* ADMIRAL Defense.app */,
+				3058C3772CA40DA8008A27E9 /* ADMIRAL_Defense.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -44,9 +44,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3058C3762CA40DA8008A27E9 /* ADMIRAL Defense */ = {
+		3058C3762CA40DA8008A27E9 /* ADMIRAL_Defense */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3058C3852CA40DAA008A27E9 /* Build configuration list for PBXNativeTarget "ADMIRAL Defense" */;
+			buildConfigurationList = 3058C3852CA40DAA008A27E9 /* Build configuration list for PBXNativeTarget "ADMIRAL_Defense" */;
 			buildPhases = (
 				3058C3732CA40DA8008A27E9 /* Sources */,
 				3058C3742CA40DA8008A27E9 /* Frameworks */,
@@ -59,11 +59,11 @@
 			fileSystemSynchronizedGroups = (
 				3058C3792CA40DA8008A27E9 /* ADMIRAL Defense */,
 			);
-			name = "ADMIRAL Defense";
+			name = ADMIRAL_Defense;
 			packageProductDependencies = (
 			);
 			productName = "ADMIRAL Defense";
-			productReference = 3058C3772CA40DA8008A27E9 /* ADMIRAL Defense.app */;
+			productReference = 3058C3772CA40DA8008A27E9 /* ADMIRAL_Defense.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -81,7 +81,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3058C3722CA40DA8008A27E9 /* Build configuration list for PBXProject "ADMIRAL Defense" */;
+			buildConfigurationList = 3058C3722CA40DA8008A27E9 /* Build configuration list for PBXProject "ADMIRAL_Defense" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -94,7 +94,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3058C3762CA40DA8008A27E9 /* ADMIRAL Defense */,
+				3058C3762CA40DA8008A27E9 /* ADMIRAL_Defense */,
 			);
 		};
 /* End PBXProject section */
@@ -310,7 +310,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3058C3722CA40DA8008A27E9 /* Build configuration list for PBXProject "ADMIRAL Defense" */ = {
+		3058C3722CA40DA8008A27E9 /* Build configuration list for PBXProject "ADMIRAL_Defense" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3058C3832CA40DAA008A27E9 /* Debug */,
@@ -319,7 +319,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3058C3852CA40DAA008A27E9 /* Build configuration list for PBXNativeTarget "ADMIRAL Defense" */ = {
+		3058C3852CA40DAA008A27E9 /* Build configuration list for PBXNativeTarget "ADMIRAL_Defense" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3058C3862CA40DAA008A27E9 /* Debug */,
